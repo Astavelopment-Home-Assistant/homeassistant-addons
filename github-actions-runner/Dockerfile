@@ -33,7 +33,7 @@ RUN mkdir -p /actions-runner-tmp
 WORKDIR /actions-runner-tmp
 
 RUN if [ "${BUILD_ARCH}" = "aarch64" ]; then \
-      export download_link="https://github.com/actions/runner/releases/download/v2.301.1/actions-runner-linux-x64-2.301.1.tar.gz"; \
+      export download_link="https://github.com/actions/runner/releases/download/v2.301.1/actions-runner-linux-arm64-2.301.1.tar.gz"; \
     elif [ "${BUILD_ARCH}" = "amd64" ]; then \
       export download_link="https://github.com/actions/runner/releases/download/v2.301.1/actions-runner-linux-x64-2.301.1.tar.gz"; \
     elif [ "${BUILD_ARCH}" = "armhf" ]; then \
