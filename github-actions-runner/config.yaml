@@ -1,6 +1,6 @@
 ---
 name: GitHub Actions runner
-version: 1.0.0
+version: 1.0.1
 slug: github_actions_runner
 description: Runner for GitHub Actions
 url: https://github.com/kdosiodjinud/homeassistant-addons/github-actions-runner
