@@ -32,23 +32,23 @@ RUN mkdir -p /actions-runner-tmp
 
 WORKDIR /actions-runner-tmp
 
+# Set the Runner version to the latest stable release
+ENV RUNNER_VERSION="2.332.0"
+
 RUN if [ "${BUILD_ARCH}" = "aarch64" ]; then \
-      export download_link="https://github.com/actions/runner/releases/download/v2.301.1/actions-runner-linux-arm64-2.301.1.tar.gz"; \
+      export download_link="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-arm64-${RUNNER_VERSION}.tar.gz"; \
     elif [ "${BUILD_ARCH}" = "amd64" ]; then \
-      export download_link="https://github.com/actions/runner/releases/download/v2.301.1/actions-runner-linux-x64-2.301.1.tar.gz"; \
-    elif [ "${BUILD_ARCH}" = "armhf" ]; then \
-      export download_link="https://github.com/actions/runner/releases/download/v2.301.1/actions-runner-linux-arm-2.301.1.tar.gz"; \
-    elif [ "${BUILD_ARCH}" = "armv7" ]; then \
-      export download_link="https://github.com/actions/runner/releases/download/v2.301.1/actions-runner-linux-arm-2.301.1.tar.gz"; \
+      export download_link="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz"; \
+    elif [ "${BUILD_ARCH}" = "armhf" ] || [ "${BUILD_ARCH}" = "armv7" ]; then \
+      export download_link="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-arm-${RUNNER_VERSION}.tar.gz"; \
     elif [ "${BUILD_ARCH}" = "i386" ]; then \
-      export download_link="https://github.com/actions/runner/releases/download/v2.301.1/actions-runner-linux-x64-2.301.1.tar.gz"; \
+      export download_link="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz"; \
     else \
-      echo "Unsupported architecture"; \
+      echo "Unsupported architecture: ${BUILD_ARCH}"; \
       exit 1; \
     fi; \
     curl -o actions-runner.tar.gz -L ${download_link} && \
     tar xzf actions-runner.tar.gz
-
 
 COPY init.sh /
 RUN chmod a+x /init.sh
