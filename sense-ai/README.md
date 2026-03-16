@@ -1,2 +1,0 @@
-# HassIO extension 
-## Setup
