@@ -1,6 +1,6 @@
 ---
 name: GitHub Actions runner
-version: 1.0.4
+version: 1.0.5
 slug: github_actions_runner
 description: Runner for GitHub Actions
 url: https://github.com/Astavelopment-Home-Assistant/homeassistant-addons
