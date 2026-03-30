@@ -24,21 +24,25 @@ bashio::log.info "Starting Nginx..."
 nginx -g "daemon off;" &
 NGINX_PID=$!
 
-# 4. Find and start Java securely without triggering SIGPIPE
+# 4. Find the actual application jar, excluding the JRE layers
 bashio::log.info "Finding and starting Terrakube API..."
-jar_file=$(find /opt/api -name "*.jar" -print -quit)
+
+# Look specifically in the workspace or root, ignoring the internal JRE libraries
+jar_file=$(find /opt/api -name "api*.jar" -not -path "*/layers/*" -print -quit)
+
+# Fallback: if 'api*.jar' is too specific, find the largest jar (the app is always bigger than libs)
+if [ -z "$jar_file" ]; then
+    jar_file=$(find /opt/api -name "*.jar" -not -path "*/layers/*" -printf "%s %p\n" | sort -nr | head -n1 | cut -d' ' -f2-)
+fi
 
 if [ -n "$jar_file" ]; then
-  bashio::log.info "Running Java jar: $jar_file"
+  bashio::log.info "Found Terrakube API at: $jar_file"
   
-  # Change to the API directory so Java finds its internal properties
   cd "$(dirname "$jar_file")"
-  
-  # Boot the Terrakube API
   java -jar "$jar_file" &
   JAVA_PID=$!
 else
-  bashio::log.error "Terrakube API jar not found!"
+  bashio::log.error "Terrakube API jar not found! Check /opt/api structure."
   exit 1
 fi
 
