@@ -1,4 +1,4 @@
-name: "Terrakube Redis Queue"
+name: "Redis"
 description: "Local ephemeral Redis queue for the Terrakube control plane."
 version: "1.0.0"
 slug: "terrakube_redis"
