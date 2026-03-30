@@ -18,7 +18,7 @@ nginx -g "daemon off;" &
 NGINX_PID=$!
 
 bashio::log.info "Finding and starting Terrakube API..."
-jar_file=$(find /app -name "*.jar" | head -n 1)
+jar_file=$(find /opt/api -name "*.jar" | head -n 1)
 if [ -n "$jar_file" ]; then
   bashio::log.info "Running Java jar: $jar_file"
   java -jar "$jar_file" &
