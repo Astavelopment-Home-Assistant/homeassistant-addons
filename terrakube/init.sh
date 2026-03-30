@@ -24,11 +24,11 @@ bashio::log.info "Starting Nginx..."
 nginx -g "daemon off;" &
 NGINX_PID=$!
 
-# 4. Find the actual application jar, excluding libraries and JRE layers
+# 4. Find the actual application jar
 bashio::log.info "Finding and starting Terrakube API..."
 
-# Search for the jar but ignore the 'lib' and 'layers' folders
-jar_file=$(find /opt/api -name "*.jar" \
+# Specifically target the workspace folder and ignore system/library paths
+jar_file=$(find /opt/api/workspace -name "*.jar" \
     -not -path "*/BOOT-INF/lib/*" \
     -not -path "*/layers/*" \
     -print -quit)
@@ -36,14 +36,13 @@ jar_file=$(find /opt/api -name "*.jar" \
 if [ -n "$jar_file" ]; then
   bashio::log.info "Found Terrakube API at: $jar_file"
   
-  # Change to the directory of the jar
   cd "$(dirname "$jar_file")"
   
   # Start Java
   java -jar "$jar_file" &
   JAVA_PID=$!
 else
-  bashio::log.error "Terrakube API jar not found! Check /opt/api folder structure."
+  bashio::log.error "Terrakube API jar not found in /opt/api/workspace!"
   exit 1
 fi
 
