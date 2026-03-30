@@ -4,7 +4,7 @@
   "github_tagfilter": "15",
   "last_update": "11-11-2023",
   "paused": true,
-  "repository": "alexbelgium/hassio-addons",
+  "repository": "Astavelopment-Home-Assistant/homeassistant-addons",
   "slug": "postgres",
   "source": "github",
   "upstream_repo": "tensorchord/pgvecto.rs",
