@@ -1,1 +1,13 @@
-
+name: "Terrakube Redis Queue"
+description: "Local ephemeral Redis queue for the Terrakube control plane."
+version: "1.0.0"
+slug: "terrakube_redis"
+init: false
+startup: services
+arch:
+  - aarch64
+  - amd64
+ports:
+  6379/tcp: 6379
+options: {}
+schema: {}
