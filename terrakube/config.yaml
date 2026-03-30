@@ -1,6 +1,7 @@
 name: Terrakube
-version: 1.0.3
+version: 1.0.4
 slug: terrakube
+init: false
 description: Terrakube UI and API server addon
 url: "https://github.com/Astavelopment-Home-Assistant/homeassistant-addons"
 startup: application
